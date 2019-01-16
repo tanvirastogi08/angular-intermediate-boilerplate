@@ -2,6 +2,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@employee-register-core/*": ["app/core/*"],
+      "@employee-register-shared/*": ["app/shared/*"],
+      "@employee-register-pipes/*": ["app/shared/pipes/*"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
+  <ng-content></ng-content>
+  <p *ngIf="message">{{message}}</p>
+</div>
+<div class="card-body">
+
+  <div class="row">
+    <div class="col-md-2">Filter by:</div>
+    <div class="col-md-4">
+      <input type="text" [(ngModel)]="listFilter"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Filtered by: {{listFilter}}</h4>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table"
+            *ngIf="employees && employees?.length > 0">
+      <thead>
+        <tr>
+          <th>
+            <button class="btn btn-primary"
+                    (click)="toggleImage()">
+                {{showImage ? 'Hide Image' : 'Show Image'}} 
+            </button>
+          </th>
+          <th>Emp Id</th>
+          <th>Name</th>
+          <th>Designation</th>
+          <th>Email</th>
+          <th>Contact</th>
+          <th>CSAT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of filteredEmployee">
+          <td ><img *ngIf="showImage"
+                    [src]="employee.profileImageUrl"
+                    [title]="employee.fullName | uppercase"
+                    [style.width.px]="imageWidth"
+                    [style.margin.px]="imageMargin"></td>
+          <td>{{employee.empId | addCharacter : '-'}}</td>
+          <td>
+            <a [routerLink]="['/employees', employee.empId]">
+              {{employee.fullName}}
+            </a>
+          </td>
+          <td>{{employee.designation}}</td>
+          <td>{{employee.emailAddress}}</td>
+          <td>{{employee.phoneNumber}}</td>
+          <app-csat [rating]="employee.csat"
+                    (notifyRating)=onRatingClicked($event)>
+            <div #contentOfCsat></div>
+            <p> My <i> projected content</i> </p>
+          </app-csat>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

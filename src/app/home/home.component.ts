@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  public title: string = 'Welcome to Employee Register';
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 
 }

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { EmployeeService } from './services/employee.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NgModule } from '@angular/core';
   providers: [
     /*
       All the Services that are to be shared throughout the application.
+      Not needed in Angular6
     */
   ]
 })
