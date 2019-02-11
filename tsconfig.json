@@ -3,9 +3,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@employee-register-core/*": ["app/core/*"],
-      "@employee-register-shared/*": ["app/shared/*"],
-      "@employee-register-pipes/*": ["app/shared/pipes/*"]
+      "@employee-portal-core/*": ["app/core/*"],
+      "@employee-portal-shared/*": ["app/shared/*"],
+      "@employee-portal-models/*": ["app/shared/models/*"],
+      "@employee-portal-services/*": ["app/core/services/*"],
+      "@employee-portal-pipes/*": ["app/shared/pipes/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

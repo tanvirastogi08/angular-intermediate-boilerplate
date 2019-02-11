@@ -13,7 +13,9 @@ export const appRoutes: Routes = [
     path: 'employees', component: EmployeesComponent
   },
   {
-    path: 'employees/:id', component: EmployeeDetailComponent, canActivate: [AuthGuardGuard]
+    path: 'employees/:id',
+    component: EmployeeDetailComponent,
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'home', component: HomeComponent

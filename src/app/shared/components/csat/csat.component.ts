@@ -1,58 +1,32 @@
 import {
   Component,
   OnChanges,
-  OnInit,
-  AfterContentInit,
-  AfterViewInit,
-  OnDestroy,
   Input,
   EventEmitter,
   Output,
-  SimpleChanges
 } from '@angular/core';
 
 @Component({
   selector: 'app-csat',
   templateUrl: './csat.component.html',
-  styleUrls: ['./csat.component.css']
+  styleUrls: ['./csat.component.scss']
 })
-export class CsatComponent implements OnChanges, OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class CsatComponent implements OnChanges {
 
   @Input() public rating: number;
-  public starWidth: number;
-  public showStar: string = 'tanvi';
-
   @Output() public notifyRating: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() {
-    console.log('In CsatComponent constructor');
-  }
+  public starWidth: number;
+  public showStar: string = 'EPortal';
 
-  public ngOnChanges(changes: SimpleChanges) {
+  constructor() { }
+
+  public ngOnChanges() {
     this.starWidth = this.rating * 75 / 5;
-    console.log('In CsatComponent ngOnChanges', changes);
-  }
-  public ngOnInit() {
-    console.log('In CsatComponent ngOnInit');
-  }
-
-  public ngAfterContentInit() {
-    console.log('In CsatComponent ngAfterContentInit');
-  }
-
-  public ngAfterViewInit() {
-    console.log('In CsatComponent ngAfterViewInit');
-  }
-
-  public ngOnDestroy() {
-    console.log('CsatComponent destroyed');
   }
 
   public onClick() {
     this.notifyRating.emit(`CSAT score ${this.rating} is clicked!`);
   }
 
-  public displayCsat() {
-    console.log('Called from parent component');
-  }
 }
