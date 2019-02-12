@@ -20,7 +20,7 @@ exports.config = {
     print: function() {}
   },
   onPrepare() {
-    require('ts-node').register({
+    require('ts-node').portal({
       project: require('path').join(__dirname, './tsconfig.e2e.json')
     });
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));

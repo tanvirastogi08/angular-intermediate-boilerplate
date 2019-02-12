@@ -1,43 +1,37 @@
 import {
   Component,
   OnInit,
-  OnChanges,
-  AfterContentInit,
-  AfterContentChecked,
-  AfterViewInit,
   OnDestroy,
-  ViewChild,
   ContentChild
 } from '@angular/core';
-import { IEmployee } from '../shared/models/employee';
-import { CsatComponent } from '../shared/components/csat/csat.component';
-import { EmployeeService } from '../core/services/employee.service';
-import { Subscriber, Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+
+import { AppModuleService } from '../app-module.service';
+
+import { IEmployee } from '@employee-portal-models/index';
+import { EmployeeService } from '@employee-portal-services/index';
+import { CsatComponent } from '@employee-portal-shared/components/csat/csat.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.css']
+  styleUrls: ['./employees.component.scss']
 })
-export class EmployeesComponent implements OnChanges, OnInit, AfterContentInit, AfterContentChecked, AfterViewInit, OnDestroy {
+export class EmployeesComponent implements OnInit, OnDestroy {
 
   @ContentChild(CsatComponent) public contentOfCsat: CsatComponent;
-  @ViewChild(CsatComponent) public viewCsat: CsatComponent;
 
-  private subscription: Subscription = new Subscription();
   public errorMessage: string;
-
+  public loading: boolean;
   public pageTitle: string = 'Employee List';
-  public imageWidth: number = 50;
-  public imageMargin: number = 2;
   public showImage: boolean = true;
-
-  public message: string = '';
-  private prevMessage: string = '';
-
+  public employees: Array<IEmployee> = [];
   public filteredEmployee: IEmployee[] = [];
 
   private _listFilter: string;
+  private subscription: Subscription = new Subscription();
+
   get listFilter(): string {
     return this._listFilter;
   }
@@ -47,54 +41,51 @@ export class EmployeesComponent implements OnChanges, OnInit, AfterContentInit, 
     this.filteredEmployee = this.listFilter ?
       this.performFilter(this.listFilter) : this.employees;
   }
-  public employees: Array<IEmployee> = [];
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(private appModuleService: AppModuleService,
+              private employeeService: EmployeeService) {
     this._listFilter = 'Designation';
-    console.log('In Employee constructor');
-  }
-
-  public ngOnChanges() {
-    console.log('In Employee ngOnChanges');
   }
 
   public ngOnInit() {
+    /* 1. Try to add all the observables to subscriptions so that
+        they could be easily destroyed when not in use
+      2. Always use the middleware(here: AppModuleService) to access
+        the data which could be shared among the components
+    */
     this.subscription.add(
-      this.employeeService.getEmployees()
+      this.appModuleService.currentEmployee
         .subscribe(
           emp => {
             this.employees = emp;
             this.filteredEmployee = this.employees;
           },
-          error => this.errorMessage = error)
+          error => this.errorMessage = error
+        )
     );
-    console.log('In Employee ngOnInit', this.employees);
-  }
-
-  public ngAfterContentInit() {
-    console.log('Employee ngAfterContentInit fired!!!!!');
-    // this.doSomething();
-  }
-
-  public ngAfterContentChecked() {
-    // contentChild is updated after the content has been checked
-    // if (this.prevMessage === this.contentOfCsat.showStar) {
-    //   console.log('AfterContentChecked (no change)');
-    // } else {
-    //   this.prevMessage = this.contentOfCsat.showStar;
-    //   console.log('AfterContentChecked');
-    //   this.doSomething();
-    // }
-  }
-
-  public ngAfterViewInit() {
-    console.log('In Employee ngAfterViewInit');
-    // this.viewCsat.displayCsat();
+    this.subscription.add(this.load());
   }
 
   public ngOnDestroy() {
     this.subscription.unsubscribe();
-    console.log('Employee component destroyed');
+  }
+
+  private load(): Subscription {
+    return this.loadEmployees()
+      .subscribe(
+        this.onFinish.bind(this),
+        this.onError.bind(this)
+      );
+  }
+
+  private loadEmployees(): Observable<IEmployee[]> {
+    return this.employeeService.getEmployees()
+      .pipe(
+        map((emp: IEmployee[]) => {
+          this.appModuleService.setEmployee(emp);
+          return emp;
+        })
+      );
   }
 
   public toggleImage() {
@@ -107,14 +98,14 @@ export class EmployeesComponent implements OnChanges, OnInit, AfterContentInit, 
       emp.designation.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
-  public onRatingClicked(message: string) {
-    // TODO: console the message to show!
-    console.log('message', message);
+  private onFinish(): void {
+    this.errorMessage = null;
+    this.loading = false;
   }
 
-  private doSomething() {
-    this.message = this.contentOfCsat ?
-      `The CSAT is ${this.contentOfCsat.showStar}` : 'Not Yet Initialized';
+  private onError(error): void {
+    this.errorMessage = error;
+    this.loading = false;
   }
 
 }

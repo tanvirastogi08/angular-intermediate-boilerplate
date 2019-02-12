@@ -61,12 +61,12 @@
     {
       "empId": "DFG3984",
       "designation": "Tester",
-      "firstName": "Gino",
-      "lastName": "Trombetti",
-      "fullName": "Gino Trombetti",
+      "firstName": "Neil",
+      "lastName": "Nitin",
+      "fullName": "Neil Nitin",
       "location": "CA",
       "phoneNumber": "408-2222222",
-      "emailAddress": "gtrombetti@gmail.com",
+      "emailAddress": "nnitin@gmail.com",
       "profileImageUrl": "https://randomuser.me/api/portraits/lego/5.jpg",
       "csat": 4.5
     },
@@ -74,11 +74,11 @@
       "empId": "DFG3230",
       "designation": "Software Architect",
       "firstName": "Marc",
-      "lastName": "Heil",
-      "fullName": "Marc Heil",
+      "lastName": "Apolo",
+      "fullName": "Marc Apolo",
       "location": "CA",
       "phoneNumber": "408-2222222",
-      "emailAddress": "mheil@gmail.com",
+      "emailAddress": "mapolo@gmail.com",
       "profileImageUrl": "https://randomuser.me/api/portraits/lego/4.jpg",
       "csat": 5
   }]
