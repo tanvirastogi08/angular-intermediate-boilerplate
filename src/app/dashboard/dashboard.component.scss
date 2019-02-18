@@ -1,0 +1,15 @@
+.loader {
+	background-color: #f1eded;
+	opacity: .4;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 999999;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	i {
+		font-size: 70px;
+	}
+}

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 import { AddCharacterPipe } from './pipes/add-character.pipe';
 import { CsatComponent } from './components/csat/csat.component';
 
@@ -18,11 +20,13 @@ import { CsatComponent } from './components/csat/csat.component';
      like: NgIf, NgForOf
     */
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     AddCharacterPipe,
     CsatComponent
   ],

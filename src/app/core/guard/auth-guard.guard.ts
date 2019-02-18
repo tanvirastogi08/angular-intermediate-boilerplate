@@ -16,11 +16,12 @@ export class AuthGuardGuard implements CanActivate {
   public canActivate(
     next: ActivatedRouteSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
-      const id = next.url[1].path;
-      if (id.length < 5) {
-        this._router.navigate(['/home']);
-        return false;
-      }
-    return true;
+    if (localStorage.getItem('currentUser')) {
+      // logged in so return true
+      return true;
+    }
+    // not logged in so redirect to login page with the return url
+    this._router.navigate(['/login']);
+    return false;
   }
 }

@@ -11,14 +11,14 @@ export class EmployeeService {
 
   private baseUrl = 'api/employee.json';
 
-  constructor(private _http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   public getEmployees(): Observable<IEmployee[]> {
-    return this._http
+    return this.http
       .get<IEmployee[]>(this.baseUrl)
       .pipe(
         map((emp: IEmployee[]) => emp),
-        catchError(this.handleError)
+          catchError(this.handleError)
       );
   }
 

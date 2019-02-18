@@ -1,0 +1,33 @@
+.center {
+  margin: 0 auto;
+  margin-top: 120px;
+  width: 40%;
+  text-align: center;
+}
+
+.card-body {
+  margin-top: 15px;
+  .container-fluid {
+    margin-top: 15px;
+  }
+}
+
+.form-input, .login-button, .alert  {
+  border: 1px solid #c9c9c9;
+  border-radius: 4px;
+  padding: .25em .75em;
+}
+
+.login-button {
+  @extend .login-button;
+  cursor: pointer;
+}
+
+.form-input {
+  @extend .form-input;
+  width: 50%
+}
+
+.alert {
+  margin-top: 10px;
+}

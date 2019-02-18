@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
-import { EmployeeService } from './services/employee.service';
+import { SharedModule } from '@employee-portal-shared/shared.module';
+
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
-  /*
-    All the components declarations should go here
-  */
+  HeaderComponent
   ],
   imports: [
-  /*
-    All the modules should be imported first
-  */
+    SharedModule
   ],
   exports: [
     /*
       All the declarations, imports that we want to use in other modules as well,
       All these can be used directly just by importing this CoreModule
     */
+   HeaderComponent
   ],
   providers: [
     /*

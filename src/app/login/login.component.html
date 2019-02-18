@@ -1,0 +1,36 @@
+<div class="center">
+  <div class="card">
+      <div class="card-header text-center">
+        Login to Employee Portal
+      </div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <form [formGroup]="loginForm" (ngSubmit)="onClickLogin()">
+            <div class="form-group">
+              <input type="text"
+                      class="form-input"
+                      formControlName="username"
+                      placeholder="username"/>
+              <div *ngIf="submitted && lForm.username.errors" class="alert alert-danger">
+                  <div *ngIf="lForm.username.errors.required">User Name is required!</div>
+                  <div *ngIf="lForm.username.errors.email">Username should be an email!</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="password"
+                    class="form-input"
+                    formControlName="password"
+                    placeholder="password"/>
+              <div *ngIf="submitted && lForm.password.errors" class="alert alert-danger">
+                  <div *ngIf="lForm.password.errors.required">Password is required!</div>
+                  <div *ngIf="lForm.password.errors.minlength">Password must be at least 6 characters</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="login-button">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
