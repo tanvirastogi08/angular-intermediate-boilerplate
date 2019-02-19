@@ -2,6 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
+## Highlights of the project
+1. All the 3 ways of Data-Sharing:
+		1.1 Input [Parent to Child]
+		1.2 Output [Child to Parent]
+		1.3 Service
+2. Creating custom pipes.
+3. Authentication by Login:
+	3.1. Creating Auth-Guard
+	3.2. Creating Interceptor for restricting unauthorized user
+4. Creating barrels and paths to access the files in a better way
+5. Creating Nested Components
+6. Creating blueprint of data by creating a model.
+7. Creating an Http-API and fetch the data [used MockData for sample]
+8. Creating custom Module
+9. Implementing Lazy loading and child-routing.
+10. Implementaion of loader by creating a common service and validation in form.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
