@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Highlights of the project
 1. All the 3 ways of Data-Sharing:
-	-- `Input` [Parent to Child]`
-	-- `Output` [Child to Parent]
-	-- `Service`
+	@`Input` [Parent to Child]
+	@`Output` [Child to Parent]
+	@`Service`
 2. Creating `custom pipes`.
 3. Authentication by Login:
 	3.1. `Creating Auth-Guard`
